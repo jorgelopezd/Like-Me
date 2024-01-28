@@ -1,11 +1,9 @@
 require('dotenv').config()
-
 const express = require('express')
 const cors = require('cors')
 const {createPosts, readPosts} = require ('../utils/pg.js')
 
 const PORT = process.env.PORT ?? 3000
-console.log(PORT)
 
 const app = express()
 

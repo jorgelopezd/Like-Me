@@ -18,10 +18,9 @@ const readPosts = async () => {
 }
 
 const createPosts = async (id,titulo,url,descripcion) => {
-    const query = 'INSERT INTO posts (id,titulo,img,descripcion) values ($1, $2, $3, $4) RETURNING *;'
+    const query = "INSERT INTO posts (id,titulo,img,descripcion) VALUES ($1, $2, $3, $4) RETURNING *;"
     const values = [id,titulo,url,descripcion]
     const result = await pool.query(query, values)
-    console.log(result.rows)
     return result.rows
 }
 
