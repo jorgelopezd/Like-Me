@@ -10,8 +10,6 @@ const config = {
     allowExitOnIdle: tru
 }
 
-console.log(config)
-
 const pool = new Pool(config)
 
 const readPosts = async () => {
@@ -19,9 +17,9 @@ const readPosts = async () => {
     return result.rows
 }
 
-const createPost = async (id,titulo,url,description) => {
-    const query = 'INSERT INTO posts (id,titulo,img,descripcion) values ($1, $2, $3, $4);'
-    const values = [id,titulo,url,description]
+const createPost = async (id,titulo,url,descripcion) => {
+    const query = 'INSERT INTO posts (id,titulo,img,descripcion) values ($1, $2, $3, $4) RETURNING *;'
+    const values = [id,titulo,url,descripcion]
     const result = await pool.query(query, values)
     console.log(result.rows)
     return result.rows
