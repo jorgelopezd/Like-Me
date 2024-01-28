@@ -6,8 +6,8 @@ const config = {
     password: process.env.PG_PASSWORD,
     host: process.env.PG_HOST,
     port: process.env.PG_PORT,
-    database: process.env.PG-DatabaseError,
-    allowExitOnIdle: tru
+    database: process.env.PG_DATABASE,
+    allowExitOnIdle: true
 }
 
 const pool = new Pool(config)
@@ -17,7 +17,7 @@ const readPosts = async () => {
     return result.rows
 }
 
-const createPost = async (id,titulo,url,descripcion) => {
+const createPosts = async (id,titulo,url,descripcion) => {
     const query = 'INSERT INTO posts (id,titulo,img,descripcion) values ($1, $2, $3, $4) RETURNING *;'
     const values = [id,titulo,url,descripcion]
     const result = await pool.query(query, values)
@@ -25,6 +25,4 @@ const createPost = async (id,titulo,url,descripcion) => {
     return result.rows
 }
 
-createPost('8','titulo 1','www.google.cl','prueba')
-
-module.exports = {readPosts,createPost}
+module.exports = {readPosts,createPosts}
